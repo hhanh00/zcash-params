@@ -18,5 +18,5 @@ rand = "0.8.4"
 lazy_static = "1.4.0"
 
 [build-dependencies.zcash_primitives]
-git = "ssh://git@github.com/hhanh00/librustzcash.git"
+git = "https://github.com/hhanh00/librustzcash.git"
 branch = "warp-sync"
