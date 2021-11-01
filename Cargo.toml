@@ -19,4 +19,4 @@ lazy_static = "1.4.0"
 
 [build-dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "6baf1ba63261dda09e5b1d4b476977842a1f61c8"
+rev = "1649c414b5b20f6e143939de33c67debe2e93bbb"
