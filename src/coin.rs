@@ -14,6 +14,13 @@ pub fn get_coin_type(coin: u8) -> CoinType {
     }
 }
 
+pub fn get_coin_id(coin: CoinType) -> u8 {
+    match coin {
+        CoinType::Zcash => 0,
+        CoinType::Ycash => 1,
+    }
+}
+
 struct YCASH;
 struct ZCASH;
 
