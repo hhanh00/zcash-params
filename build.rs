@@ -3,6 +3,7 @@ use group::GroupEncoding;
 use std::io::Write;
 use std::fs::File;
 use std::fs;
+use std::path::Path;
 
 #[allow(dead_code)]
 fn write_generators_bin() {
@@ -19,10 +20,11 @@ fn write_generators_bin() {
     }
     let mut f = File::create("src/generators.bin").unwrap();
     f.write(&bb).unwrap();
-
-    let home = std::env::var("HOME").unwrap();
-    fs::copy(format!("{}/.zcash-params/sapling-output.params", home), "src/sapling-output.params").unwrap();
-    fs::copy(format!("{}/.zcash-params/sapling-spend.params", home), "src/sapling-spend.params").unwrap();
+    if !Path::new("src/sapling-output.params").exists() {
+        let home = std::env::var("HOME").unwrap();
+        fs::copy(format!("{}/.zcash-params/sapling-output.params", home), "src/sapling-output.params").unwrap();
+        fs::copy(format!("{}/.zcash-params/sapling-spend.params", home), "src/sapling-spend.params").unwrap();
+    }
 }
 
 fn main() {
