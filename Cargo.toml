@@ -14,17 +14,17 @@ serde = {version = "1.0.126", features = ["derive"]}
 #hex = "0.4.3"
 #jubjub = "0.8.0"
 #byteorder = "^1.4"
-group = "^0.11"
-#ff = "^0.11"
+group = "0.12.0"
+ff = "0.12.0"
 #bls12_381 = "0.6.0"
 #rand = "0.8.4"
 #lazy_static = "1.4.0"
 
 [dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "c708380ef59b254f71a7d0b417e03f44fd267c2d"
+rev = "466806932d21597eb4f89a449347fa1983dffb22"
 
 [build-dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "c708380ef59b254f71a7d0b417e03f44fd267c2d"
+rev = "466806932d21597eb4f89a449347fa1983dffb22"
 
