@@ -14,12 +14,12 @@ fn write_generators_bin() {
         for w in g.iter() {
             for p in w.iter() {
                 let h = p.to_bytes();
-                bb.write(&h).unwrap();
+                bb.write_all(&h).unwrap();
             }
         }
     }
     let mut f = File::create("src/generators.bin").unwrap();
-    f.write(&bb).unwrap();
+    f.write_all(&bb).unwrap();
     if !Path::new("src/sapling-output.params").exists() {
         let home = std::env::var("HOME").unwrap();
         fs::copy(format!("{}/.zcash-params/sapling-output.params", home), "src/sapling-output.params").unwrap();
