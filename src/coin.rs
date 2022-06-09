@@ -24,14 +24,14 @@ pub fn get_coin_id(coin: CoinType) -> u8 {
 struct YCASH;
 struct ZCASH;
 
-pub fn get_coin_chain(c: CoinType) -> &'static dyn CoinChain {
+pub fn get_coin_chain(c: CoinType) -> &'static (dyn CoinChain + Send) {
     match c {
         CoinType::Ycash => &YCASH,
         CoinType::Zcash => &ZCASH,
     }
 }
 
-pub trait CoinChain {
+pub trait CoinChain: Send + Sync {
     fn network(&self) -> &'static Network;
     fn ticker(&self) -> &'static str;
 }
