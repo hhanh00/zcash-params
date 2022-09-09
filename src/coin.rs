@@ -3,13 +3,14 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum CoinType {
-    Ycash, Zcash,
+    Ycash, Zcash, PirateChain,
 }
 
 pub fn get_coin_type(coin: u8) -> CoinType {
     match coin {
         0 => CoinType::Zcash,
         1 => CoinType::Ycash,
+        2 => CoinType::PirateChain,
         _ => CoinType::Zcash,
     }
 }
@@ -18,22 +19,26 @@ pub fn get_coin_id(coin: CoinType) -> u8 {
     match coin {
         CoinType::Zcash => 0,
         CoinType::Ycash => 1,
+        CoinType::PirateChain => 2,
     }
 }
 
 struct YCASH;
 struct ZCASH;
+struct PIRATECHAIN;
 
 pub fn get_coin_chain(c: CoinType) -> &'static (dyn CoinChain + Send) {
     match c {
         CoinType::Ycash => &YCASH,
         CoinType::Zcash => &ZCASH,
+        CoinType::PirateChain => &PIRATECHAIN,
     }
 }
 
 pub trait CoinChain: Send + Sync {
     fn network(&self) -> &'static Network;
     fn ticker(&self) -> &'static str;
+    fn has_transparent(&self) -> bool;
 }
 
 impl CoinChain for YCASH {
@@ -44,6 +49,8 @@ impl CoinChain for YCASH {
     fn ticker(&self) -> &'static str {
         "ycash"
     }
+
+    fn has_transparent(&self) -> bool { true }
 }
 
 impl CoinChain for ZCASH {
@@ -54,6 +61,20 @@ impl CoinChain for ZCASH {
     fn ticker(&self) -> &'static str {
         "zcash"
     }
+
+    fn has_transparent(&self) -> bool { true }
+}
+
+impl CoinChain for PIRATECHAIN {
+    fn network(&self) -> &'static Network {
+        &Network::PirateChainMainNetwork
+    }
+
+    fn ticker(&self) -> &'static str {
+        "pirate-chain"
+    }
+
+    fn has_transparent(&self) -> bool { false }
 }
 
 pub fn get_branch(network: &Network, height: u32) -> BranchId {
