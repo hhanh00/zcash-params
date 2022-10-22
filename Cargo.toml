@@ -22,9 +22,9 @@ ff = "0.12.0"
 
 [dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "625a06128659d011881698ec13edb66c078a6aa2"
+rev = "f546cf86f4ee7191c9b85c51af86ed9c36bb9eb0"
 
 [build-dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "625a06128659d011881698ec13edb66c078a6aa2"
+rev = "f546cf86f4ee7191c9b85c51af86ed9c36bb9eb0"
 

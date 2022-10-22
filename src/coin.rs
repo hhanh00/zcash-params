@@ -6,6 +6,12 @@ pub enum CoinType {
     Ycash, Zcash, PirateChain,
 }
 
+impl Default for CoinType {
+    fn default() -> Self {
+        CoinType::Ycash
+    }
+}
+
 pub fn get_coin_type(coin: u8) -> CoinType {
     match coin {
         0 => CoinType::Zcash,
