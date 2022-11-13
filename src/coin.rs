@@ -45,6 +45,7 @@ pub trait CoinChain: Send + Sync {
     fn network(&self) -> &'static Network;
     fn ticker(&self) -> &'static str;
     fn has_transparent(&self) -> bool;
+    fn has_unified(&self) -> bool;
 }
 
 impl CoinChain for YCASH {
@@ -57,18 +58,20 @@ impl CoinChain for YCASH {
     }
 
     fn has_transparent(&self) -> bool { true }
+
+    fn has_unified(&self) -> bool { false }
 }
 
 impl CoinChain for ZCASH {
-    fn network(&self) -> &'static Network {
-        &Network::MainNetwork
-    }
+    fn network(&self) -> &'static Network { &Network::MainNetwork }
 
     fn ticker(&self) -> &'static str {
         "zcash"
     }
 
     fn has_transparent(&self) -> bool { true }
+
+    fn has_unified(&self) -> bool { true }
 }
 
 impl CoinChain for PIRATECHAIN {
@@ -81,9 +84,10 @@ impl CoinChain for PIRATECHAIN {
     }
 
     fn has_transparent(&self) -> bool { false }
+
+    fn has_unified(&self) -> bool { false }
 }
 
 pub fn get_branch(network: &Network, height: u32) -> BranchId {
     BranchId::for_height(network, BlockHeight::from_u32(height))
 }
-
