@@ -18,12 +18,15 @@ fn write_generators_bin() {
             }
         }
     }
-    let mut f = File::create("src/generators.bin").unwrap();
+    let src_path = Path::new("src");
+    let mut f = File::create(src_path.join("generators.bin")).unwrap();
     f.write_all(&bb).unwrap();
-    if !Path::new("src/sapling-output.params").exists() {
-        let home = std::env::var("HOME").unwrap();
-        fs::copy(format!("{}/.zcash-params/sapling-output.params", home), "src/sapling-output.params").unwrap();
-        fs::copy(format!("{}/.zcash-params/sapling-spend.params", home), "src/sapling-spend.params").unwrap();
+    if !src_path.join("sapling-output.params").exists() {
+        let home = std::env::var("HOME").unwrap_or(String::new());
+        let zcash_path = Path::new(&home).join(".zcash-params");
+        println!("Searching for params in {}", zcash_path.to_string_lossy());
+        fs::copy(zcash_path.join("sapling-output.params"), src_path.join("sapling-output.params")).unwrap();
+        fs::copy(zcash_path.join("sapling-spend.params"), src_path.join("sapling-spend.params")).unwrap();
     }
 }
 
