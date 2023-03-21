@@ -14,7 +14,7 @@ serde = {version = "1.0.126", features = ["derive"]}
 #hex = "0.4.3"
 #jubjub = "0.8.0"
 #byteorder = "^1.4"
-group = "0.12.0"
+group = "0.13.0"
 ff = "0.12.0"
 #bls12_381 = "0.6.0"
 #rand = "0.8.4"
@@ -22,11 +22,11 @@ ff = "0.12.0"
 
 [dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "7469d70261e8e72f2bbf3163704ddf8fd825b1aa"
+rev = "f39dd6c2af20662fd1aaa9e00172efebd3435ff4"
 #path = "../../librustzcash/zcash_primitives"
 
 [build-dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "7469d70261e8e72f2bbf3163704ddf8fd825b1aa"
+rev = "f39dd6c2af20662fd1aaa9e00172efebd3435ff4"
 #path = "../../librustzcash/zcash_primitives"
 
