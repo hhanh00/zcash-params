@@ -1,9 +1,11 @@
+use serde::{Deserialize, Serialize};
 use zcash_primitives::consensus::{BlockHeight, BranchId, Network};
-use serde::{Serialize, Deserialize};
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
 pub enum CoinType {
-    Ycash, Zcash, PirateChain,
+    Ycash,
+    Zcash,
+    PirateChain,
 }
 
 impl Default for CoinType {
@@ -57,21 +59,31 @@ impl CoinChain for YCASH {
         "ycash"
     }
 
-    fn has_transparent(&self) -> bool { true }
+    fn has_transparent(&self) -> bool {
+        true
+    }
 
-    fn has_unified(&self) -> bool { false }
+    fn has_unified(&self) -> bool {
+        false
+    }
 }
 
 impl CoinChain for ZCASH {
-    fn network(&self) -> &'static Network { &Network::MainNetwork }
+    fn network(&self) -> &'static Network {
+        &Network::MainNetwork
+    }
 
     fn ticker(&self) -> &'static str {
         "zcash"
     }
 
-    fn has_transparent(&self) -> bool { true }
+    fn has_transparent(&self) -> bool {
+        true
+    }
 
-    fn has_unified(&self) -> bool { true }
+    fn has_unified(&self) -> bool {
+        true
+    }
 }
 
 impl CoinChain for PIRATECHAIN {
@@ -83,9 +95,13 @@ impl CoinChain for PIRATECHAIN {
         "pirate-chain"
     }
 
-    fn has_transparent(&self) -> bool { false }
+    fn has_transparent(&self) -> bool {
+        false
+    }
 
-    fn has_unified(&self) -> bool { false }
+    fn has_unified(&self) -> bool {
+        false
+    }
 }
 
 pub fn get_branch(network: &Network, height: u32) -> BranchId {

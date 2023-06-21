@@ -1,9 +1,9 @@
-use zcash_primitives::constants::generate_pedersen_hash_exp_table;
 use group::GroupEncoding;
-use std::io::Write;
-use std::fs::File;
 use std::fs;
+use std::fs::File;
+use std::io::Write;
 use std::path::Path;
+use zcash_primitives::constants::generate_pedersen_hash_exp_table;
 
 #[allow(dead_code)]
 fn write_generators_bin() {
@@ -25,8 +25,16 @@ fn write_generators_bin() {
         let home = std::env::var("HOME").unwrap_or(String::new());
         let zcash_path = Path::new(&home).join(".zcash-params");
         println!("Searching for params in {}", zcash_path.to_string_lossy());
-        fs::copy(zcash_path.join("sapling-output.params"), src_path.join("sapling-output.params")).unwrap();
-        fs::copy(zcash_path.join("sapling-spend.params"), src_path.join("sapling-spend.params")).unwrap();
+        fs::copy(
+            zcash_path.join("sapling-output.params"),
+            src_path.join("sapling-output.params"),
+        )
+        .unwrap();
+        fs::copy(
+            zcash_path.join("sapling-spend.params"),
+            src_path.join("sapling-spend.params"),
+        )
+        .unwrap();
     }
 }
 
