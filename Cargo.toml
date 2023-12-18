@@ -7,7 +7,6 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
 serde = {version = "1.0.126", features = ["derive"]}
 
 [build-dependencies]
@@ -18,7 +17,6 @@ group = "0.13.0"
 ff = "0.12.0"
 #bls12_381 = "0.6.0"
 #rand = "0.8.4"
-#lazy_static = "1.4.0"
 
 [dependencies.zcash_primitives]
 git = "https://github.com/hhanh00/librustzcash.git"
