@@ -1,9 +1,43 @@
-use zcash_primitives::constants::generate_pedersen_hash_exp_table;
+use sapling_crypto::constants::{PEDERSEN_HASH_EXP_WINDOW_SIZE, PEDERSEN_HASH_GENERATORS};
 use group::GroupEncoding;
 use std::io::Write;
 use std::fs::File;
 use std::fs;
 use std::path::Path;
+use jubjub::SubgroupPoint;
+use group::{Group, ff::PrimeField};
+
+fn generate_pedersen_hash_exp_table() -> Vec<Vec<Vec<SubgroupPoint>>> {
+    let window = PEDERSEN_HASH_EXP_WINDOW_SIZE;
+
+    PEDERSEN_HASH_GENERATORS
+        .iter()
+        .cloned()
+        .map(|mut g| {
+            let mut tables = vec![];
+
+            let mut num_bits = 0;
+            while num_bits <= jubjub::Fr::NUM_BITS {
+                let mut table = Vec::with_capacity(1 << window);
+                let mut base = SubgroupPoint::identity();
+
+                for _ in 0..(1 << window) {
+                    table.push(base);
+                    base += g;
+                }
+
+                tables.push(table);
+                num_bits += window;
+
+                for _ in 0..window {
+                    g = g.double();
+                }
+            }
+
+            tables
+        })
+        .collect()
+}
 
 #[allow(dead_code)]
 fn write_generators_bin() {
