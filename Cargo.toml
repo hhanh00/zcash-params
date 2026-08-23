@@ -10,21 +10,15 @@ edition = "2018"
 serde = {version = "1.0.126", features = ["derive"]}
 
 [build-dependencies]
-#hex = "0.4.3"
-#jubjub = "0.8.0"
-#byteorder = "^1.4"
 group = "0.13.0"
-ff = "0.12.0"
-#bls12_381 = "0.6.0"
-#rand = "0.8.4"
 
-[dependencies.zcash_primitives]
+[dependencies.zcash_protocol]
 git = "https://github.com/hhanh00/librustzcash.git"
-rev = "d5c3fbcc"
-#path = "../../librustzcash/zcash_primitives"
+rev = "eb715c4ed"
+#path = "../../librustzcash/components/zcash_protocol"
 
-[build-dependencies.zcash_primitives]
-git = "https://github.com/hhanh00/librustzcash.git"
-rev = "d5c3fbcc"
-#path = "../../librustzcash/zcash_primitives"
+[build-dependencies.sapling]
+package = "sapling-crypto"
+git = "https://github.com/hhanh00/sapling-crypto.git"
+rev = "70b8cf8"
 

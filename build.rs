@@ -1,5 +1,5 @@
-use zcash_primitives::constants::generate_pedersen_hash_exp_table;
 use group::GroupEncoding;
+use sapling::constants::PEDERSEN_HASH_EXP_TABLE;
 use std::io::Write;
 use std::fs::File;
 use std::fs;
@@ -7,7 +7,7 @@ use std::path::Path;
 
 #[allow(dead_code)]
 fn write_generators_bin() {
-    let hash_exp_table = generate_pedersen_hash_exp_table();
+    let hash_exp_table = &*PEDERSEN_HASH_EXP_TABLE;
 
     let mut bb: Vec<u8> = vec![];
     for g in hash_exp_table.iter().take(3) {

@@ -1,4 +1,4 @@
-use zcash_primitives::consensus::{BranchId, BlockHeight, Network};
+use zcash_protocol::consensus::{BranchId, BlockHeight, Network};
 
 pub const NETWORK: Network = Network::YCashTestNetwork;
 pub const TICKER: &str = "ycash";
